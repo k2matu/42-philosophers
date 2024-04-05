@@ -6,7 +6,7 @@
 /*   By: kmatjuhi <kmatjuhi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 11:54:25 by kmatjuhi          #+#    #+#             */
-/*   Updated: 2024/04/04 13:52:41 by kmatjuhi         ###   ########.fr       */
+/*   Updated: 2024/04/05 18:15:29 by kmatjuhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,14 @@
 
 typedef struct s_philo
 {
-	int		x;
-	int		fork;
-	long	die;
-	long	eat;
-	long	sleep;
-	long	must_eat;
+	pthread_t	th;
+	int			x;
+	int			fork;
+	long		die;
+	long		eat;
+	long		sleep;
+	long		times_eat;
+	int			d_flag;
 }	t_philo;
 
 typedef struct s_struct
