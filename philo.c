@@ -6,7 +6,7 @@
 /*   By: kmatjuhi <kmatjuhi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 11:42:07 by kmatjuhi          #+#    #+#             */
-/*   Updated: 2024/04/05 18:18:45 by kmatjuhi         ###   ########.fr       */
+/*   Updated: 2024/04/08 13:49:26 by kmatjuhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,17 @@ t_struct	intialize_t_struct(int argc, char **argv, int philo_nr)
 	int			i;
 
 	p.philos = malloc(philo_nr * sizeof(t_philo));
-	i = 0;
+	if (!p.philos)
+		return (p);
+	i = -1;
 	while (++i <= philo_nr)
 	{
-		p.philos[i].x = i;
+		p.philos[i].x = i + 1;
 		p.philos[i].die = atol(argv[2]);
 		p.philos[i].eat = atol(argv[3]);
 		p.philos[i].sleep = atol(argv[4]);
+		p.philos[i].d_flag = 0;
+		pthread_mutex_init(&p.philos[i].r_fork, NULL);
 		if (argc == 6)
 			p.philos[i].times_eat = atol(argv[5]);
 	}
@@ -48,7 +52,6 @@ int	main(int argc, char **argv)
 	p = intialize_t_struct(argc, argv, p.nr_philos);
 	if (!p.philos)
 		return (1);
-	printf("%d and eat %ld\n", p.philos[2].x, p.philos[2].eat);
 	if (tread(p) == 1)
 	{
 		free(p.philos);
