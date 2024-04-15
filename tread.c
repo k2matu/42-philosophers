@@ -6,7 +6,7 @@
 /*   By: kmatjuhi <kmatjuhi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 13:36:31 by kmatjuhi          #+#    #+#             */
-/*   Updated: 2024/04/09 14:58:34 by kmatjuhi         ###   ########.fr       */
+/*   Updated: 2024/04/15 10:13:08 by kmatjuhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,33 +32,35 @@ static void	*routine(void *args)
 
 	while (philo->times_eat != 0)
 	{
-		ft_eat(&philo);
-		ft_sleep(&philo);
+		ft_eat(philo);
+		philo->times_eat--;
+		ft_sleep(philo);
+		ft_think(philo);
 	}
 	return (NULL);
 }
 
-int	tread(t_struct p)
+int	tread(t_struct *p)
 {
 	int			i;
 	int			*res;
 	pthread_t	th_monitor;
 
 	i = 0;
-	if (pthread_create(&th_monitor, NULL, &monitor, (void *)&p) != 0)
-		return (1);
-	while (i < p.nr_philos)
+	// if (pthread_create(&th_monitor, NULL, &monitor, (void *)&p) != 0)
+	// 	return (1);
+	while (i < p->nr_philos)
 	{
-		if (pthread_create(&p.philos[i].th, NULL, &routine, (void *)&p.philos[i]) != 0)
+		if (pthread_create(&p->philos[i].th, NULL, &routine, (void *)&p->philos[i]) != 0)
 			return (1);
 		i++;
 	}
 	i = 0;
-	if (pthread_join(th_monitor, (void **) &res) != 0)
-		return (1);
-	while (i < p.nr_philos)
+	// if (pthread_join(th_monitor, (void **) &res) != 0)
+	// 	return (1);
+	while (i < p->nr_philos)
 	{
-		if (pthread_join(p.philos[i].th, (void **) &res) != 0)
+		if (pthread_join(p->philos[i].th, (void **) &res) != 0)
 			return (1);
 		i++;
 	}
