@@ -6,7 +6,7 @@
 /*   By: kmatjuhi <kmatjuhi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 11:42:07 by kmatjuhi          #+#    #+#             */
-/*   Updated: 2024/04/15 18:39:29 by kmatjuhi         ###   ########.fr       */
+/*   Updated: 2024/04/16 10:49:42 by kmatjuhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 5 && argc != 6)
 		return (1);
-	p = malloc(sizeof(t_struct));
+	p = (t_struct *)malloc(sizeof(t_struct));
 	if (!p)
 		return (1);
 	p->nr_philos = atol(argv[1]);

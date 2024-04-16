@@ -6,7 +6,7 @@
 /*   By: kmatjuhi <kmatjuhi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 14:42:29 by kmatjuhi          #+#    #+#             */
-/*   Updated: 2024/04/15 18:52:45 by kmatjuhi         ###   ########.fr       */
+/*   Updated: 2024/04/16 10:48:49 by kmatjuhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	ft_eat(t_philo *philo)
 {
+	if (philo->d_flag == 1)
+		return ;
 	if ((time_in_ms() - philo->time_last_meal) > philo->die)
 	{
 		printf("%ld %d died\n", time_in_ms(), philo->x);
@@ -33,11 +35,15 @@ void	ft_eat(t_philo *philo)
 
 void	ft_sleep(t_philo *philo)
 {
+	if (philo->d_flag == 1)
+		return ;
 	printf("%ld %d is sleeping\n", time_in_ms(), philo->x);
 	usleep(philo->sleep * 1000);
 }
 
 void	ft_think(t_philo *philo)
 {
+	if (philo->d_flag == 1)
+		return ;
 	printf("%ld %d is thinking\n", time_in_ms(), philo->x);
 }
