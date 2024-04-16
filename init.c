@@ -6,7 +6,7 @@
 /*   By: kmatjuhi <kmatjuhi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:52:24 by kmatjuhi          #+#    #+#             */
-/*   Updated: 2024/04/15 10:09:48 by kmatjuhi         ###   ########.fr       */
+/*   Updated: 2024/04/15 18:39:16 by kmatjuhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ t_struct	*init_struct(int argc, char **argv, t_struct *p)
 {
 	int	i;
 
-	if (!p->philos)
-		return (p);
 	i = -1;
 	while (++i < p->nr_philos)
 	{
@@ -44,10 +42,15 @@ int	init_mutex(t_struct *p)
 
 	i = -1;
 	p->forks = malloc(p->nr_philos * sizeof(pthread_mutex_t));
+	if (!p->forks)
+		return (1);
 	while (++i < p->nr_philos)
 	{
 		if (pthread_mutex_init(&(p->forks[i]), NULL) != 0)
+		{
+			free(p->forks);
 			return (1);
+		}
 	}
 	i = -1;
 	while (++i < p->nr_philos)
