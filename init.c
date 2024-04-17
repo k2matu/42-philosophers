@@ -6,7 +6,7 @@
 /*   By: kmatjuhi <kmatjuhi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:52:24 by kmatjuhi          #+#    #+#             */
-/*   Updated: 2024/04/16 10:50:39 by kmatjuhi         ###   ########.fr       */
+/*   Updated: 2024/04/17 10:41:23 by kmatjuhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,12 @@ t_struct	*init_struct(int argc, char **argv, t_struct *p)
 		p->philos[i].die = atol(argv[2]);
 		p->philos[i].eat = atol(argv[3]);
 		p->philos[i].sleep = atol(argv[4]);
-		p->philos[i].d_flag = 0;
+		p->philos[i].d_flag = &p->dead_flag;
 		p->philos[i].time_last_meal = time_in_ms();
 		if (argc == 6)
 			p->philos[i].times_eat = atol(argv[5]);
+		else
+			p->philos[i].times_eat = -1;
 	}
 	if (p->philos[0].die < 0 || p->philos[0].eat < 0 || p->philos[0].sleep < 0)
 	{
