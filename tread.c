@@ -6,7 +6,7 @@
 /*   By: kmatjuhi <kmatjuhi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 13:36:31 by kmatjuhi          #+#    #+#             */
-/*   Updated: 2024/04/17 10:40:58 by kmatjuhi         ###   ########.fr       */
+/*   Updated: 2024/04/18 09:47:26 by kmatjuhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,13 @@ static void	*routine(void *args)
 	philo = (t_philo *)args;
 	while (philo->times_eat != 0 && philo->d_flag[0] == -1)
 	{
-		ft_eat(philo);
-		if (philo->times_eat == 0 || philo->d_flag[0] != -1)
+		if (ft_eat(philo) == 0)
 			return (NULL);
-		ft_sleep(philo);
-		if (philo->d_flag[0] != -1)
+		if (ft_sleep(philo) == 0)
 			return (NULL);
-		ft_think(philo);
-		if (philo->d_flag[0] != -1)
+		if (ft_think(philo) == 0)
 			return (NULL);
+
 
 	}
 	return (NULL);

@@ -6,7 +6,7 @@
 #    By: kmatjuhi <kmatjuhi@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/03 11:54:18 by kmatjuhi          #+#    #+#              #
-#    Updated: 2024/04/11 05:06:23 by kmatjuhi         ###   ########.fr        #
+#    Updated: 2024/04/17 10:42:37 by kmatjuhi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,7 @@ OFILES	=	$(SRCS:.c=.o)
 
 CC		=	cc
 RM		=	-rm -f
-CFLAGS	=	-g -pthread 
-# -Wall -Wextra -Werror
+CFLAGS	=	-g -pthread -Wall -Wextra -Werror
 
 all:		$(NAME)
 
