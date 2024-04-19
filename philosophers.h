@@ -6,7 +6,7 @@
 /*   By: kmatjuhi <kmatjuhi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 11:54:25 by kmatjuhi          #+#    #+#             */
-/*   Updated: 2024/04/18 12:14:44 by kmatjuhi         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:06:31 by kmatjuhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct s_philo
 	pthread_t		th;
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*l_fork;
-	pthread_mutex_t *lock;
+	pthread_mutex_t	*lock;
 	int				x;
 	int				fork;
 	long			die;
@@ -44,15 +44,13 @@ typedef struct s_struct
 	int				dead_flag;
 }	t_struct;
 
-long		time_in_ms(void);
-long		atol(const char *str);
-int			print_msg(t_philo *philo, const char *msg);
-int			tread(t_struct *p);
-t_struct	*init_struct(int argc, char **argv, t_struct *p);
-int			init_mutex(t_struct *p);
-int			ft_eat(t_philo *philo);
-int			ft_sleep(t_philo *philo);
-int			ft_think(t_philo *philo);
-void 		ft_usleep(long time);
+long	time_in_ms(void);
+long	atol(const char *str);
+int		print_msg(t_philo *philo, const char *msg);
+int		tread(t_struct *p);
+int		init(int argc, char **argv, t_struct *p);
+int		ft_eat(t_philo *philo);
+int		ft_sleep(t_philo *philo);
+int		ft_think(t_philo *philo);
 
 #endif

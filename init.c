@@ -6,13 +6,13 @@
 /*   By: kmatjuhi <kmatjuhi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:52:24 by kmatjuhi          #+#    #+#             */
-/*   Updated: 2024/04/18 09:23:29 by kmatjuhi         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:06:40 by kmatjuhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-t_struct	*init_struct(int argc, char **argv, t_struct *p)
+static int	init_struct(int argc, char **argv, t_struct *p)
 {
 	int	i;
 
@@ -30,15 +30,18 @@ t_struct	*init_struct(int argc, char **argv, t_struct *p)
 		else
 			p->philos[i].times_eat = -1;
 	}
-	if (p->philos[0].die < 0 || p->philos[0].eat < 0 || p->philos[0].sleep < 0)
+	if (p->philos[0].die < 0 || p->philos[0].eat < 0 \
+	|| p->philos[0].sleep < 0 || (argc == 6 && p->philos[0].times_eat < 0))
 	{
 		free(p->philos);
-		p->philos = NULL;
+		pthread_mutex_destroy(p->forks);
+		free(p->forks);
+		return (0);
 	}
-	return (p);
+	return (1);
 }
 
-int	init_mutex(t_struct *p)
+static int	init_mutex(t_struct *p)
 {
 	int	i;
 
@@ -51,7 +54,7 @@ int	init_mutex(t_struct *p)
 		if (pthread_mutex_init(&(p->forks[i]), NULL) != 0)
 		{
 			free(p->forks);
-			return (1);
+			return (0);
 		}
 	}
 	i = -1;
@@ -64,5 +67,17 @@ int	init_mutex(t_struct *p)
 		else
 			p->philos[i].r_fork = &p->forks[i + 1];
 	}
-	return (0);
+	return (1);
+}
+
+int	init(int argc, char **argv, t_struct *p)
+{
+	if (!init_mutex(p))
+	{
+		free(p->philos);
+		return (0);
+	}
+	if (!init_struct(argc, argv, p))
+		return (0);
+	return (1);
 }
