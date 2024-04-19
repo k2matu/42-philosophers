@@ -6,7 +6,7 @@
 /*   By: kmatjuhi <kmatjuhi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 11:42:07 by kmatjuhi          #+#    #+#             */
-/*   Updated: 2024/04/17 09:53:04 by kmatjuhi         ###   ########.fr       */
+/*   Updated: 2024/04/18 12:07:37 by kmatjuhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,13 @@ int	main(int argc, char **argv)
 		return (1);
 	p.dead_flag = -1;
 	p.nr_philos = atol(argv[1]);
-	if (p.nr_philos < 0)
+	if (p.nr_philos < 1)
 		return (1);
+	if (p.nr_philos == 1)
+	{
+		printf("%ld 1 died\n", time_in_ms());
+		return (0);
+	}
 	p.philos = malloc(p.nr_philos * sizeof(t_philo));
 	if (!p.philos)
 		return (1);

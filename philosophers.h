@@ -6,7 +6,7 @@
 /*   By: kmatjuhi <kmatjuhi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 11:54:25 by kmatjuhi          #+#    #+#             */
-/*   Updated: 2024/04/18 09:38:17 by kmatjuhi         ###   ########.fr       */
+/*   Updated: 2024/04/18 12:14:44 by kmatjuhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ int			init_mutex(t_struct *p);
 int			ft_eat(t_philo *philo);
 int			ft_sleep(t_philo *philo);
 int			ft_think(t_philo *philo);
+void 		ft_usleep(long time);
 
 #endif
