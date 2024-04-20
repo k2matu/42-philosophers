@@ -6,7 +6,7 @@
 /*   By: kmatjuhi <kmatjuhi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 13:14:28 by kmatjuhi          #+#    #+#             */
-/*   Updated: 2024/04/19 12:20:13 by kmatjuhi         ###   ########.fr       */
+/*   Updated: 2024/04/20 09:45:14 by kmatjuhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ int	print_msg(t_philo *philo, const char *msg)
 			pthread_mutex_unlock(philo->lock);
 			return (0);
 		}
-		printf("last meal was %ld\n", philo->time_last_meal);
-		printf("1. %ld %d died\n", time_in_ms(), philo->x);
+		printf("%ld %d died\n", time_in_ms(), philo->x);
 		philo->d_flag[0] = philo->x;
 		pthread_mutex_unlock(philo->lock);
 		return (0);

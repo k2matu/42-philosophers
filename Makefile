@@ -6,13 +6,13 @@
 #    By: kmatjuhi <kmatjuhi@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/03 11:54:18 by kmatjuhi          #+#    #+#              #
-#    Updated: 2024/04/17 10:42:37 by kmatjuhi         ###   ########.fr        #
+#    Updated: 2024/04/20 07:07:11 by kmatjuhi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 
-SRCS = philo.c time_in_ms.c utils.c msg.c tread.c init.c routine.c
+SRCS = philo.c time_in_ms.c atol.c msg.c tread.c init.c routine.c
 
 OFILES	=	$(SRCS:.c=.o)
 
