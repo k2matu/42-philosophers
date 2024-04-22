@@ -6,7 +6,7 @@
 /*   By: kmatjuhi <kmatjuhi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 14:42:29 by kmatjuhi          #+#    #+#             */
-/*   Updated: 2024/04/20 19:49:01 by kmatjuhi         ###   ########.fr       */
+/*   Updated: 2024/04/22 09:29:40 by kmatjuhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	ft_eat(t_philo *philo)
 {
 	if (*(philo->d_flag) != -1)
 		return (0);
+	// while loops which runs until mutex_lock opens.
 	pthread_mutex_lock(philo->l_fork);
 	pthread_mutex_lock(philo->r_fork);
 	if (!print_msg(philo, "has taken a fork") \
