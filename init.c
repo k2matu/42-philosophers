@@ -6,7 +6,7 @@
 /*   By: kmatjuhi <kmatjuhi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:52:24 by kmatjuhi          #+#    #+#             */
-/*   Updated: 2024/07/04 11:24:00 by kmatjuhi         ###   ########.fr       */
+/*   Updated: 2024/07/04 13:09:54 by kmatjuhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static int	init_struct(int argc, t_struct *p)
 	}
 	return (1);
 }
+
 static void	lock_forks(t_struct *p)
 {
 	int	i;
