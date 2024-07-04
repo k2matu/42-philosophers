@@ -6,7 +6,7 @@
 /*   By: kmatjuhi <kmatjuhi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 11:54:25 by kmatjuhi          #+#    #+#             */
-/*   Updated: 2024/04/20 19:26:51 by kmatjuhi         ###   ########.fr       */
+/*   Updated: 2024/07/04 11:27:45 by kmatjuhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ typedef struct s_philo
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*lock;
 	int				x;
+	int				*left_eating;
+	int				*right_eating;
 	int				fork;
 	long			die;
 	long			eat;
@@ -56,5 +58,6 @@ int		init(int argc, t_struct *p);
 int		ft_eat(t_philo *philo);
 int		ft_sleep(t_philo *philo);
 int		ft_think(t_philo *philo);
+int		error_msg(char *str);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: kmatjuhi <kmatjuhi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 14:42:29 by kmatjuhi          #+#    #+#             */
-/*   Updated: 2024/04/22 09:29:40 by kmatjuhi         ###   ########.fr       */
+/*   Updated: 2024/07/04 13:09:19 by kmatjuhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,21 @@
 int	ft_usleep(t_philo *philo, long time)
 {
 	long	start;
+	long	new_time;
 
 	start = time_in_ms();
-	if ((start + time) - philo->time_last_meal > philo->die)
+	new_time = time_in_ms();
+	if ((start + time) - philo->time_last_meal > (philo->die))
 	{
 		printf("%ld %d died\n", philo->time_last_meal + philo->die, philo->x);
 		philo->d_flag[0] = philo->x;
 		return (0);
 	}
-	usleep(time * 1000);
+	while ((time + start) > new_time)
+	{
+		usleep(1000);
+		new_time = time_in_ms();
+	}
 	return (1);
 }
 
@@ -31,7 +37,6 @@ int	ft_eat(t_philo *philo)
 {
 	if (*(philo->d_flag) != -1)
 		return (0);
-	// while loops which runs until mutex_lock opens.
 	pthread_mutex_lock(philo->l_fork);
 	pthread_mutex_lock(philo->r_fork);
 	if (!print_msg(philo, "has taken a fork") \
