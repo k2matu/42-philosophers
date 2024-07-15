@@ -6,7 +6,7 @@
 /*   By: kmatjuhi <kmatjuhi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 13:36:31 by kmatjuhi          #+#    #+#             */
-/*   Updated: 2024/07/15 07:43:25 by kmatjuhi         ###   ########.fr       */
+/*   Updated: 2024/07/15 07:51:21 by kmatjuhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,14 @@ static void	*routine(void *args)
 
 int	checker(t_philo *philo)
 {
-	// pthread_mutex_lock(philo->lock);
 	if ((time_in_ms() - philo->time_last_meal) > philo->die)
 	{
 		if (philo->times_eat == 0 || philo->d_flag[0] != -1)
-		{
-			// pthread_mutex_unlock(philo->lock);
 			return (0);
-		}
 		printf("%ld %d died\n", time_in_ms() - philo->time_start, philo->x);
 		philo->d_flag[0] = philo->x;
-		// pthread_mutex_unlock(philo->lock);
 		return (0);
 	}
-	// pthread_mutex_unlock(philo->lock);
 	return (1);
 }
 
