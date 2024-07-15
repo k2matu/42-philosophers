@@ -6,7 +6,7 @@
 /*   By: kmatjuhi <kmatjuhi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 11:54:25 by kmatjuhi          #+#    #+#             */
-/*   Updated: 2024/07/04 11:27:45 by kmatjuhi         ###   ########.fr       */
+/*   Updated: 2024/07/14 23:41:16 by kmatjuhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_philo
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*lock;
+	int				nr_philos;
 	int				x;
 	int				*left_eating;
 	int				*right_eating;
@@ -35,6 +36,7 @@ typedef struct s_philo
 	long			sleep;
 	long			times_eat;
 	long			time_last_meal;
+	long 			time_start;
 	int				*d_flag;
 }	t_philo;
 

@@ -6,7 +6,7 @@
 /*   By: kmatjuhi <kmatjuhi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:52:24 by kmatjuhi          #+#    #+#             */
-/*   Updated: 2024/07/04 13:09:54 by kmatjuhi         ###   ########.fr       */
+/*   Updated: 2024/07/14 23:41:37 by kmatjuhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,14 @@ static int	init_struct(int argc, t_struct *p)
 	i = -1;
 	while (++i < p->nr_philos)
 	{
+		p->philos[i].nr_philos = p->nr_philos;
 		p->philos[i].x = i + 1;
 		p->philos[i].die = p->die;
 		p->philos[i].eat = p->eat;
 		p->philos[i].sleep = p->sleep;
 		p->philos[i].d_flag = &p->dead_flag;
 		p->philos[i].time_last_meal = time_in_ms();
+		p->philos[i].time_start = time_in_ms();
 		if (argc == 6)
 			p->philos[i].times_eat = p->times_eat;
 		else

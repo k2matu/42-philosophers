@@ -6,7 +6,7 @@
 /*   By: kmatjuhi <kmatjuhi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 14:42:29 by kmatjuhi          #+#    #+#             */
-/*   Updated: 2024/07/04 13:09:19 by kmatjuhi         ###   ########.fr       */
+/*   Updated: 2024/07/15 00:24:08 by kmatjuhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,12 @@ int	ft_usleep(t_philo *philo, long time)
 
 	start = time_in_ms();
 	new_time = time_in_ms();
-	if ((start + time) - philo->time_last_meal > (philo->die))
-	{
-		printf("%ld %d died\n", philo->time_last_meal + philo->die, philo->x);
-		philo->d_flag[0] = philo->x;
+	if (*(philo->d_flag) != -1)
 		return (0);
-	}
 	while ((time + start) > new_time)
 	{
+		if (*(philo->d_flag) != -1)
+			return (0);
 		usleep(1000);
 		new_time = time_in_ms();
 	}
