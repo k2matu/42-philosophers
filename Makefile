@@ -6,7 +6,7 @@
 #    By: kmatjuhi <kmatjuhi@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/03 11:54:18 by kmatjuhi          #+#    #+#              #
-#    Updated: 2024/07/04 10:54:45 by kmatjuhi         ###   ########.fr        #
+#    Updated: 2024/07/15 09:27:32 by kmatjuhi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,13 +19,13 @@ SRCS = 	philo.c \
 		tread.c \
 		init.c \
 		routine.c \
-		error_msg.c
+		error.c
 
 OFILES	=	$(SRCS:.c=.o)
 
 CC		=	cc
 RM		=	-rm -f
-CFLAGS	=	-g -pthread -Wall -Wextra -Werror
+CFLAGS	=	-pthread -Wall -Wextra -Werror -g
 
 all:		$(NAME)
 

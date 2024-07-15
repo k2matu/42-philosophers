@@ -6,7 +6,7 @@
 /*   By: kmatjuhi <kmatjuhi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 11:54:25 by kmatjuhi          #+#    #+#             */
-/*   Updated: 2024/07/14 23:41:16 by kmatjuhi         ###   ########.fr       */
+/*   Updated: 2024/07/15 09:21:20 by kmatjuhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct s_philo
 	long			sleep;
 	long			times_eat;
 	long			time_last_meal;
-	long 			time_start;
+	long			time_start;
 	int				*d_flag;
 }	t_philo;
 
@@ -60,6 +60,7 @@ int		init(int argc, t_struct *p);
 int		ft_eat(t_philo *philo);
 int		ft_sleep(t_philo *philo);
 int		ft_think(t_philo *philo);
-int		error_msg(char *str);
+int		error_msg(char *str, int exit_code);
+void	cleanup_resources(t_struct *p);
 
 #endif

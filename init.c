@@ -6,13 +6,13 @@
 /*   By: kmatjuhi <kmatjuhi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:52:24 by kmatjuhi          #+#    #+#             */
-/*   Updated: 2024/07/14 23:41:37 by kmatjuhi         ###   ########.fr       */
+/*   Updated: 2024/07/15 09:22:44 by kmatjuhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-static int	init_struct(int argc, t_struct *p)
+static void	init_struct(int argc, t_struct *p)
 {
 	int	i;
 
@@ -32,7 +32,6 @@ static int	init_struct(int argc, t_struct *p)
 		else
 			p->philos[i].times_eat = -1;
 	}
-	return (1);
 }
 
 static void	lock_forks(t_struct *p)
@@ -63,13 +62,13 @@ static int	init_mutex(t_struct *p)
 	i = -1;
 	p->forks = malloc((p->nr_philos + 1) * sizeof(pthread_mutex_t));
 	if (!p->forks)
-		return (error_msg("Malloc failed"));
+		return (error_msg("Malloc failed", 0));
 	while (++i <= p->nr_philos)
 	{
 		if (pthread_mutex_init(&(p->forks[i]), NULL) != 0)
 		{
-			free(p->forks);
-			return (0);
+			cleanup_resources(p);
+			error_msg("Mutex init failed", 0);
 		}
 	}
 	lock_forks(p);
@@ -79,11 +78,7 @@ static int	init_mutex(t_struct *p)
 int	init(int argc, t_struct *p)
 {
 	if (!init_mutex(p))
-	{
-		free(p->philos);
 		return (0);
-	}
-	if (!init_struct(argc, p))
-		return (0);
+	init_struct(argc, p);
 	return (1);
 }
