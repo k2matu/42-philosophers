@@ -26,7 +26,7 @@ static void	*routine(void *args)
 		printf("%ld 1 died\n", time_in_ms() - philo->time_last_meal);
 		return (NULL);
 	}
-	while (philo->times_eat != 0 && philo->d_flag[0] == -1)
+	while (1)
 	{
 		if (ft_eat(philo) == 0)
 			return (NULL);
@@ -40,14 +40,20 @@ static void	*routine(void *args)
 
 int	checker(t_philo *philo)
 {
+	pthread_mutex_lock(philo->lock);
 	if ((time_in_ms() - philo->time_last_meal) > philo->die)
 	{
 		if (philo->times_eat == 0 || philo->d_flag[0] != -1)
+		{
+			pthread_mutex_unlock(philo->lock);
 			return (0);
+		}
 		printf("%ld %d died\n", time_in_ms() - philo->time_start, philo->x);
 		philo->d_flag[0] = philo->x;
+		pthread_mutex_unlock(philo->lock);
 		return (0);
 	}
+	pthread_mutex_unlock(philo->lock);
 	return (1);
 }
 

@@ -62,5 +62,6 @@ int		ft_sleep(t_philo *philo);
 int		ft_think(t_philo *philo);
 int		error_msg(char *str, int exit_code);
 void	cleanup_resources(t_struct *p);
+int		print_msg2(t_philo *philo, const char *msg);
 
 #endif

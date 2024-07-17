@@ -12,7 +12,7 @@
 
 NAME = philo
 
-SRCS = 	philo.c \
+SRCS = 	main.c \
 		time_in_ms.c \
 		atol.c \
 		msg.c \
@@ -25,14 +25,16 @@ OFILES	=	$(SRCS:.c=.o)
 
 CC		=	cc
 RM		=	-rm -f
-CFLAGS	=	-pthread -Wall -Wextra -Werror -g
+CFLAGS	=	-Wall -Wextra -Werror
+LDFLAGS =	-pthread
 
 all:		$(NAME)
 
 $(NAME):	$(OFILES)
+	$(CC) $(CFLAGS) $(OFILES) -o $(NAME) $(LDFLAGS)
 
 %.o: %.c
-		$(CC) -c $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	$(RM) $(OFILES)

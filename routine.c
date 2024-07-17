@@ -33,29 +33,29 @@ int	ft_usleep(t_philo *philo, long time)
 
 int	ft_eat(t_philo *philo)
 {
-	if (*(philo->d_flag) != -1)
-		return (0);
 	pthread_mutex_lock(philo->l_fork);
 	pthread_mutex_lock(philo->r_fork);
 	if (!print_msg(philo, "has taken a fork") \
 	|| !print_msg(philo, "has taken a fork") \
 	|| !print_msg(philo, "is eating"))
 	{
-		pthread_mutex_unlock(philo->l_fork);
 		pthread_mutex_unlock(philo->r_fork);
+		pthread_mutex_unlock(philo->l_fork);
 		return (0);
 	}
+	pthread_mutex_lock(philo->lock);
 	philo->time_last_meal = time_in_ms();
+	pthread_mutex_unlock(philo->lock);
 	if (philo->times_eat != -1)
 		philo->times_eat--;
 	if (!ft_usleep (philo, philo->eat))
 	{
-		pthread_mutex_unlock(philo->l_fork);
 		pthread_mutex_unlock(philo->r_fork);
+		pthread_mutex_unlock(philo->l_fork);
 		return (0);
 	}
-	pthread_mutex_unlock(philo->l_fork);
 	pthread_mutex_unlock(philo->r_fork);
+	pthread_mutex_unlock(philo->l_fork);
 	return (1);
 }
 
@@ -74,7 +74,7 @@ int	ft_think(t_philo *philo)
 {
 	if (*(philo->d_flag) != -1)
 		return (0);
-	if (print_msg(philo, "is thinking") == 0) 
+	if (print_msg(philo, "is thinking") == 0)
 		return (0);
 	return (1);
 }
