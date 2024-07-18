@@ -6,7 +6,7 @@
 /*   By: kmatjuhi <kmatjuhi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 10:53:55 by kmatjuhi          #+#    #+#             */
-/*   Updated: 2024/07/18 15:19:03 by kmatjuhi         ###   ########.fr       */
+/*   Updated: 2024/07/18 22:21:39 by kmatjuhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	check_death(t_philo *philo)
 		if (philo->d_flag[0] != -1)
 		{
 			pthread_mutex_unlock(philo->meal_lock);
-			return (0);
+			return (FALSE);
 		}
 		pthread_mutex_unlock(philo->meal_lock);
 		pthread_mutex_lock(philo->write_lock);
@@ -29,19 +29,19 @@ static int	check_death(t_philo *philo)
 		pthread_mutex_lock(philo->dead_lock);
 		philo->d_flag[0] = philo->x;
 		pthread_mutex_unlock(philo->dead_lock);
-		return (0);
+		return (FALSE);
 	}
 	pthread_mutex_unlock(philo->meal_lock);
-	return (1);
+	return (TRUE);
 }
 
 static int	check_ate(t_philo *philo)
 {
 	if (philo->times_eat == -1)
-		return (1);
+		return (TRUE);
 	if (philo->times_eat == 0)
-		return (0);
-	return (1);
+		return (FALSE);
+	return (TRUE);
 }
 
 void	*monitoring(void *args)

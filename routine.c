@@ -6,7 +6,7 @@
 /*   By: kmatjuhi <kmatjuhi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 14:42:29 by kmatjuhi          #+#    #+#             */
-/*   Updated: 2024/07/18 15:21:15 by kmatjuhi         ###   ########.fr       */
+/*   Updated: 2024/07/18 22:34:37 by kmatjuhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	ft_eat(t_philo *philo)
 	pthread_mutex_lock(philo->meal_lock);
 	philo->time_last_meal = time_in_ms();
 	pthread_mutex_unlock(philo->meal_lock);
-	ft_usleep (philo, philo->eat);
+	ft_usleep (philo->eat);
 	pthread_mutex_lock(philo->meal_lock);
 	if (philo->times_eat != -1)
 		philo->times_eat--;
@@ -34,7 +34,7 @@ static void	ft_eat(t_philo *philo)
 static void	ft_sleep(t_philo *philo)
 {
 	print_msg(philo, "is sleeping");
-	ft_usleep(philo, philo->sleep);
+	ft_usleep(philo->sleep);
 }
 
 static void	ft_think(t_philo *philo)
@@ -48,10 +48,10 @@ int	dead_philo(t_philo *philo)
 	if (philo->d_flag[0] != -1)
 	{
 		pthread_mutex_unlock(philo->dead_lock);
-		return (1);
+		return (TRUE);
 	}
 	pthread_mutex_unlock(philo->dead_lock);
-	return (0);
+	return (FALSE);
 }
 
 void	*routine(void *args)
@@ -59,8 +59,6 @@ void	*routine(void *args)
 	t_philo	*philo;
 
 	philo = (t_philo *)args;
-	if (philo->x % 2 == 0)
-		usleep(50);
 	if (philo->nr_philos == 1)
 	{
 		printf("%ld 1 has taken a fork\n", time_in_ms() - time_in_ms());
@@ -68,6 +66,8 @@ void	*routine(void *args)
 		printf("%ld 1 died\n", time_in_ms() - philo->time_last_meal);
 		return (NULL);
 	}
+	if (philo->x % 2 == 0)
+		usleep(50);
 	while (!dead_philo(philo) && philo->times_eat != 0)
 	{
 		ft_eat(philo);

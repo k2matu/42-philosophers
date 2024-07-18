@@ -6,7 +6,7 @@
 #    By: kmatjuhi <kmatjuhi@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/03 11:54:18 by kmatjuhi          #+#    #+#              #
-#    Updated: 2024/07/18 14:27:13 by kmatjuhi         ###   ########.fr        #
+#    Updated: 2024/07/18 21:19:17 by kmatjuhi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ OFILES	=	$(SRCS:.c=.o)
 
 CC		=	cc
 RM		=	-rm -f
-# CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	-Wall -Wextra -Werror
 LDFLAGS =	-pthread
 
 all:		$(NAME)

@@ -6,7 +6,7 @@
 /*   By: kmatjuhi <kmatjuhi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 12:36:46 by kmatjuhi          #+#    #+#             */
-/*   Updated: 2024/07/18 14:28:50 by kmatjuhi         ###   ########.fr       */
+/*   Updated: 2024/07/18 21:19:48 by kmatjuhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ long	time_in_ms(void)
 	return (millisec);
 }
 
-void	ft_usleep(t_philo *philo, long time)
+void	ft_usleep(long time)
 {
 	long	start;
 	long	new_time;

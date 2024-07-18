@@ -6,7 +6,7 @@
 /*   By: kmatjuhi <kmatjuhi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:52:24 by kmatjuhi          #+#    #+#             */
-/*   Updated: 2024/07/18 13:54:39 by kmatjuhi         ###   ########.fr       */
+/*   Updated: 2024/07/18 22:16:57 by kmatjuhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,16 +77,31 @@ static int	init_mutex(t_struct *p)
 		}
 	}
 	lock_forks(p);
-	return (1);
+	return (TRUE);
 }
 
 int	init(int argc, t_struct *p)
 {
-	pthread_mutex_init(&(p->meal_lock), NULL);
-	pthread_mutex_init(&(p->write_lock), NULL);
-	pthread_mutex_init(&(p->dead_lock), NULL);
+	if (pthread_mutex_init(&(p->meal_lock), NULL) != 0)
+	{
+		free(p->philos);
+		error_msg("Mutex init failed", FALSE);
+	}
+	if (pthread_mutex_init(&(p->write_lock), NULL) != 0)
+	{
+		pthread_mutex_destroy(&(p->meal_lock));
+		free(p->philos);
+		error_msg("Mutex init failed", FALSE);
+	}
+	if (pthread_mutex_init(&(p->dead_lock), NULL) != 0)
+	{
+		pthread_mutex_destroy(&(p->meal_lock));
+		pthread_mutex_destroy(&(p->write_lock));
+		free(p->philos);
+		error_msg("Mutex init failed", FALSE);
+	}
 	if (!init_mutex(p))
-		return (0);
+		return (FALSE);
 	init_struct(argc, p);
-	return (1);
+	return (TRUE);
 }

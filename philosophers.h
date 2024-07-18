@@ -6,12 +6,15 @@
 /*   By: kmatjuhi <kmatjuhi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 11:54:25 by kmatjuhi          #+#    #+#             */
-/*   Updated: 2024/07/18 15:05:03 by kmatjuhi         ###   ########.fr       */
+/*   Updated: 2024/07/18 22:14:20 by kmatjuhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILOSOPHERS_H
 # define PHILOSOPHERS_H
+
+# define TRUE 1
+# define FALSE 0
 
 # include <pthread.h>
 # include <stdio.h>
@@ -65,7 +68,7 @@ void	print_msg(t_philo *philo, const char *msg);
 int		tread(t_struct *p);
 int		init(int argc, t_struct *p);
 int		error_msg(char *str, int exit_code);
-void	ft_usleep(t_philo *philo, long time);
+void	ft_usleep(long time);
 int		dead_philo(t_philo *philo);
 
 #endif
