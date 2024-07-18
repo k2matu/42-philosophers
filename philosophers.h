@@ -6,7 +6,7 @@
 /*   By: kmatjuhi <kmatjuhi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 11:54:25 by kmatjuhi          #+#    #+#             */
-/*   Updated: 2024/07/15 09:21:20 by kmatjuhi         ###   ########.fr       */
+/*   Updated: 2024/07/18 11:05:12 by kmatjuhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define PHILOSOPHERS_H
 
 # include <pthread.h>
-# include <string.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -52,16 +51,15 @@ typedef struct s_struct
 	int				dead_flag;
 }	t_struct;
 
+void	*monitoring(void *args);
+void	*routine(void *args);
+void	cleanup_resources(t_struct *p, int i);
 long	time_in_ms(void);
-long	atol(const char *str);
+long	p_atol(const char *str);
 int		print_msg(t_philo *philo, const char *msg);
 int		tread(t_struct *p);
 int		init(int argc, t_struct *p);
-int		ft_eat(t_philo *philo);
-int		ft_sleep(t_philo *philo);
-int		ft_think(t_philo *philo);
 int		error_msg(char *str, int exit_code);
-void	cleanup_resources(t_struct *p);
-int		print_msg2(t_philo *philo, const char *msg);
+int		ft_usleep(t_philo *philo, long time);
 
 #endif

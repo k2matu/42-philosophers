@@ -6,20 +6,21 @@
 #    By: kmatjuhi <kmatjuhi@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/03 11:54:18 by kmatjuhi          #+#    #+#              #
-#    Updated: 2024/07/15 09:27:32 by kmatjuhi         ###   ########.fr        #
+#    Updated: 2024/07/18 11:00:37 by kmatjuhi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 
 SRCS = 	main.c \
-		time_in_ms.c \
-		atol.c \
-		msg.c \
-		tread.c \
+		error.c \
 		init.c \
+		monitor.c \
+		msg.c \
+		p_atol.c \
 		routine.c \
-		error.c
+		time_func.c \
+		tread.c \
 
 OFILES	=	$(SRCS:.c=.o)
 

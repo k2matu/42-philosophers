@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_msg.c                                        :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmatjuhi <kmatjuhi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 10:52:34 by kmatjuhi          #+#    #+#             */
-/*   Updated: 2024/07/15 09:14:25 by kmatjuhi         ###   ########.fr       */
+/*   Updated: 2024/07/18 09:22:21 by kmatjuhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,14 @@ int	error_msg(char *str, int exit_code)
 	return (exit_code);
 }
 
-void	cleanup_resources(t_struct *p)
+void	cleanup_resources(t_struct *p, int i)
 {
-	int	i;
-
-	i = 0;
 	if (p->forks)
 	{
-		while (i < p->nr_philos)
+		while (i >= 0)
 		{
 			pthread_mutex_destroy(&p->forks[i]);
-			i++;
+			i--;
 		}
 		free(p->forks);
 	}

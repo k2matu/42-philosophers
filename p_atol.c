@@ -6,13 +6,13 @@
 /*   By: kmatjuhi <kmatjuhi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 18:21:35 by kmatjuhi          #+#    #+#             */
-/*   Updated: 2024/04/03 13:13:21 by kmatjuhi         ###   ########.fr       */
+/*   Updated: 2024/07/18 10:57:20 by kmatjuhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-static int	ft_strlen(const char *s)
+static int	p_strlen(const char *s)
 {
 	long	i;
 
@@ -22,7 +22,7 @@ static int	ft_strlen(const char *s)
 	return (i);
 }
 
-long	atol(const char *str)
+long	p_atol(const char *str)
 {
 	int		i;
 	long	n;
@@ -42,7 +42,7 @@ long	atol(const char *str)
 		n = n * 10 + str[i] - '0';
 		i++;
 	}
-	if (i != ft_strlen(str))
+	if (i != p_strlen(str))
 		return (-1);
 	return (n * negative);
 }

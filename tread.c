@@ -6,82 +6,33 @@
 /*   By: kmatjuhi <kmatjuhi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 13:36:31 by kmatjuhi          #+#    #+#             */
-/*   Updated: 2024/07/15 09:46:41 by kmatjuhi         ###   ########.fr       */
+/*   Updated: 2024/07/18 11:11:50 by kmatjuhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-static void	*routine(void *args)
+static int	join_threads(t_struct *p, pthread_t monitor, int threads)
 {
-	t_philo	*philo;
+	int	i;
 
-	philo = (t_philo *)args;
-	if (philo->x % 2 == 0)
-		usleep(10);
-	if (philo->nr_philos == 1)
+	i = 0;
+	if (pthread_join(monitor, NULL) != 0)
+		return (error_msg("Pthread join failed", 0));
+	while (i < threads)
 	{
-		printf("%ld 1 has taken a fork\n", time_in_ms() - time_in_ms());
-		usleep(philo->die * 1000);
-		printf("%ld 1 died\n", time_in_ms() - philo->time_last_meal);
-		return (NULL);
+		if (pthread_join(p->philos[i].th, NULL) != 0)
+			return (error_msg("Pthread join failed", 0));
+		i++;
 	}
-	while (1)
-	{
-		if (ft_eat(philo) == 0)
-			return (NULL);
-		if (ft_sleep(philo) == 0)
-			return (NULL);
-		if (ft_think(philo) == 0)
-			return (NULL);
-	}
-	return (NULL);
-}
-
-int	checker(t_philo *philo)
-{
-	pthread_mutex_lock(philo->lock);
-	if ((time_in_ms() - philo->time_last_meal) > philo->die)
-	{
-		if (philo->times_eat == 0 || philo->d_flag[0] != -1)
-		{
-			pthread_mutex_unlock(philo->lock);
-			return (0);
-		}
-		printf("%ld %d died\n", time_in_ms() - philo->time_start, philo->x);
-		philo->d_flag[0] = philo->x;
-		pthread_mutex_unlock(philo->lock);
-		return (0);
-	}
-	pthread_mutex_unlock(philo->lock);
 	return (1);
-}
-
-static void	*monitoring(void *args)
-{
-	t_struct	*p;
-	int			i;
-
-	p = (t_struct *)args;
-	if (p->nr_philos == 1)
-		return (NULL);
-	while (1)
-	{
-		i = 0;
-		while (i < p->nr_philos)
-		{
-			if (!(checker(&p->philos[i])))
-				return (NULL);
-			i++;
-		}
-	}
-	return (NULL);
 }
 
 int	tread(t_struct *p)
 {
 	pthread_t	monitor;
 	int			i;
+	int			code;
 
 	i = 0;
 	if (pthread_create(&monitor, NULL, &monitoring, p) != 0)
@@ -90,17 +41,15 @@ int	tread(t_struct *p)
 	{
 		if (pthread_create(&p->philos[i].th, NULL, \
 		&routine, (void *)&p->philos[i]) != 0)
-			return (error_msg("Pthread create failed", 0));
+		{
+			code = error_msg("Pthread create failed", 0);
+			break ;
+		}
 		i++;
 	}
-	i = 0;
-	if (pthread_join(monitor, NULL) != 0)
-		return (error_msg("Pthread join failed", 0));
-	while (i < p->nr_philos)
-	{
-		if (pthread_join(p->philos[i].th, NULL) != 0)
-			return (error_msg("Pthread join failed", 0));
-		i++;
-	}
+	if (join_threads(p, monitor, i) == 0)
+		return (0);
+	if (code == 0)
+		return (0);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: kmatjuhi <kmatjuhi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:52:24 by kmatjuhi          #+#    #+#             */
-/*   Updated: 2024/07/15 09:22:44 by kmatjuhi         ###   ########.fr       */
+/*   Updated: 2024/07/18 10:40:46 by kmatjuhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,15 @@ static int	init_mutex(t_struct *p)
 	i = -1;
 	p->forks = malloc((p->nr_philos + 1) * sizeof(pthread_mutex_t));
 	if (!p->forks)
+	{
+		free(p->philos);
 		return (error_msg("Malloc failed", 0));
+	}
 	while (++i <= p->nr_philos)
 	{
 		if (pthread_mutex_init(&(p->forks[i]), NULL) != 0)
 		{
-			cleanup_resources(p);
+			cleanup_resources(p, i);
 			error_msg("Mutex init failed", 0);
 		}
 	}
