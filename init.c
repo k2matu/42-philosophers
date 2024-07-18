@@ -6,7 +6,7 @@
 /*   By: kmatjuhi <kmatjuhi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 13:52:24 by kmatjuhi          #+#    #+#             */
-/*   Updated: 2024/07/18 10:40:46 by kmatjuhi         ###   ########.fr       */
+/*   Updated: 2024/07/18 13:54:39 by kmatjuhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ static void	lock_forks(t_struct *p)
 	{
 		while (++i < p->nr_philos)
 		{
-			p->philos[i].lock = &p->forks[p->nr_philos];
+			p->philos[i].meal_lock = &p->meal_lock;
+			p->philos[i].write_lock = &p->write_lock;
+			p->philos[i].dead_lock = &p->dead_lock;
 			p->philos[i].l_fork = &p->forks[i];
 			if (i == p->nr_philos - 1)
 				p->philos[p->nr_philos - 1].r_fork = &(p->forks[0]);
@@ -60,13 +62,13 @@ static int	init_mutex(t_struct *p)
 	int	i;
 
 	i = -1;
-	p->forks = malloc((p->nr_philos + 1) * sizeof(pthread_mutex_t));
+	p->forks = malloc((p->nr_philos) * sizeof(pthread_mutex_t));
 	if (!p->forks)
 	{
 		free(p->philos);
 		return (error_msg("Malloc failed", 0));
 	}
-	while (++i <= p->nr_philos)
+	while (++i < p->nr_philos)
 	{
 		if (pthread_mutex_init(&(p->forks[i]), NULL) != 0)
 		{
@@ -80,6 +82,9 @@ static int	init_mutex(t_struct *p)
 
 int	init(int argc, t_struct *p)
 {
+	pthread_mutex_init(&(p->meal_lock), NULL);
+	pthread_mutex_init(&(p->write_lock), NULL);
+	pthread_mutex_init(&(p->dead_lock), NULL);
 	if (!init_mutex(p))
 		return (0);
 	init_struct(argc, p);

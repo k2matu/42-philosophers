@@ -6,7 +6,7 @@
 /*   By: kmatjuhi <kmatjuhi@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 10:52:34 by kmatjuhi          #+#    #+#             */
-/*   Updated: 2024/07/18 09:22:21 by kmatjuhi         ###   ########.fr       */
+/*   Updated: 2024/07/18 14:41:46 by kmatjuhi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,9 @@ void	cleanup_resources(t_struct *p, int i)
 {
 	if (p->forks)
 	{
-		while (i >= 0)
+		while (--i >= 0)
 		{
 			pthread_mutex_destroy(&p->forks[i]);
-			i--;
 		}
 		free(p->forks);
 	}
