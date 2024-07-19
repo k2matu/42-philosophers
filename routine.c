@@ -21,12 +21,10 @@ static void	ft_eat(t_philo *philo)
 	print_msg(philo, "is eating");
 	pthread_mutex_lock(philo->meal_lock);
 	philo->time_last_meal = time_in_ms();
-	pthread_mutex_unlock(philo->meal_lock);
-	ft_usleep (philo, philo->eat);
-	pthread_mutex_lock(philo->meal_lock);
 	if (philo->times_eat > 0)
 		philo->times_eat--;
 	pthread_mutex_unlock(philo->meal_lock);
+	ft_usleep (philo, philo->eat);
 	pthread_mutex_unlock(philo->r_fork);
 	pthread_mutex_unlock(philo->l_fork);
 }
@@ -71,11 +69,9 @@ void	*routine(void *args)
 		ft_think(philo);
 		ft_usleep(philo, philo->eat / 2);
 	}
-	while (!dead_philo(philo) && philo->times_eat != 0)
+	while (!dead_philo(philo))
 	{
 		ft_eat(philo);
-		if (philo->times_eat == 0)
-			return (NULL);
 		ft_sleep(philo);
 		ft_think(philo);
 	}

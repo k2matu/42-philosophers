@@ -24,39 +24,39 @@
 
 typedef struct s_philo
 {
-	pthread_t		th;
-	pthread_mutex_t	*r_fork;
-	pthread_mutex_t	*l_fork;
-	pthread_mutex_t	*write_lock;
-	pthread_mutex_t	*meal_lock;
-	pthread_mutex_t	*dead_lock;
-	int				nr_philos;
-	int				x;
-	int				*left_eating;
-	int				*right_eating;
-	int				fork;
+	pthread_t			th;
+	pthread_mutex_t		*r_fork;
+	pthread_mutex_t		*l_fork;
+	pthread_mutex_t		*write_lock;
+	pthread_mutex_t		*meal_lock;
+	pthread_mutex_t		*dead_lock;
+	int					nr_philos;
+	int					x;
+	int					*left_eating;
+	int					*right_eating;
+	int					fork;
 	long long			die;
 	long long			eat;
 	long long			sleep;
 	long long			times_eat;
 	long long			time_last_meal;
 	long long			time_start;
-	int				*d_flag;
+	int					*d_flag;
 }	t_philo;
 
 typedef struct s_struct
 {
-	t_philo			*philos;
-	pthread_mutex_t	*forks;
-	pthread_mutex_t	write_lock;
-	pthread_mutex_t	meal_lock;
-	pthread_mutex_t	dead_lock;
-	int				nr_philos;
+	t_philo				*philos;
+	pthread_mutex_t		*forks;
+	pthread_mutex_t		write_lock;
+	pthread_mutex_t		meal_lock;
+	pthread_mutex_t		dead_lock;
+	int					nr_philos;
 	long long			die;
 	long long			eat;
 	long long			sleep;
 	long long			times_eat;
-	int				dead_flag;
+	int					dead_flag;
 }	t_struct;
 
 void		*monitoring(void *args);
