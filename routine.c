@@ -66,7 +66,7 @@ void	*routine(void *args)
 		printf("%lld 1 died\n", time_in_ms() - philo->time_last_meal);
 		return (NULL);
 	}
-	if (philo->x % 2 == 0)
+	if (philo->x % 2 != 0)
 	{
 		ft_think(philo);
 		ft_usleep(philo, philo->eat / 2);
