@@ -16,6 +16,6 @@ void	print_msg(t_philo *philo, const char *msg)
 {
 	pthread_mutex_lock(philo->write_lock);
 	if (!dead_philo(philo))
-		printf("%ld %d %s\n", time_in_ms() - philo->time_start, philo->x, msg);
+		printf("%lld %d %s\n", time_in_ms() - philo->time_start, philo->x, msg);
 	pthread_mutex_unlock(philo->write_lock);
 }

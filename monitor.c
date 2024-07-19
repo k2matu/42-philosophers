@@ -24,7 +24,7 @@ static int	check_death(t_philo *philo)
 		}
 		pthread_mutex_unlock(philo->meal_lock);
 		pthread_mutex_lock(philo->write_lock);
-		printf("%ld %d died\n", time_in_ms() - philo->time_start, philo->x);
+		printf("%lld %d died\n", time_in_ms() - philo->time_start, philo->x);
 		pthread_mutex_unlock(philo->write_lock);
 		pthread_mutex_lock(philo->dead_lock);
 		philo->d_flag[0] = philo->x;

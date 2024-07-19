@@ -12,26 +12,28 @@
 
 #include "philosophers.h"
 
-long	time_in_ms(void)
+long long	time_in_ms(void)
 {
 	struct timeval	te;
-	long			millisec;
+	long long		millisec;
 
 	gettimeofday(&te, NULL);
 	millisec = te.tv_sec * 1000LL + te.tv_usec / 1000;
 	return (millisec);
 }
 
-void	ft_usleep(long time)
+void	ft_usleep(t_philo *philo, long long time)
 {
-	long	start;
-	long	new_time;
+	long long	start;
+	long long	new_time;
 
 	start = time_in_ms();
 	new_time = time_in_ms();
 	while ((time + start) > new_time)
 	{
 		usleep(1000);
+		if (dead_philo(philo))
+			return ;
 		new_time = time_in_ms();
 	}
 }
